@@ -8,15 +8,15 @@
     # https://code-ready.github.io/crc/#required-software-packages_gsg
     - apt:
         name:
-          - network-manager
-          - libvirt-daemon
-          - libvirt-daemon-system
-          - qemu-kvm
+        - network-manager
+        - libvirt-daemon
+        - libvirt-daemon-system
+        - qemu-kvm
       become: true
     # 2.3. Installing CodeReady Containers
     # https://code-ready.github.io/crc/#installing-codeready-containers_gsg
     - get_url:
-        url: https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.14.0/crc-linux-amd64.tar.xz
-        dest: ./crc-linux-amd64.tar.xz
-
-
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.14.0/{{ crc_archive }}
+        dest: ./{{ crc_archive }}
+    vars:
+       crc_archive: crc-linux-amd64.tar.xz
