@@ -2,6 +2,14 @@
 - name: chaos-shift
   hosts: localhost
   tasks:
+  - name: Preparation
+    block:
+    - file:
+        path: ~/{{ item }}
+        state: directory
+      loop:
+        - opt
+        - bin
   - name: CodeReady Containers
     block:
     # 2.2. Required software packages for Linux
@@ -18,5 +26,14 @@
     - get_url:
         url: https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.14.0/{{ crc_archive }}
         dest: ./{{ crc_archive }}
+    - unarchive:
+        src: ./{{ crc_archive }}
+        dest: ~/opt
+        creates: ~/opt/{{ crc_dir }}
+    - file:
+        src: ~/opt/{{ crc_dir }}/crc
+        dest: ~/bin/crc
+        state: link
     vars:
        crc_archive: crc-linux-amd64.tar.xz
+       crc_dir: crc-linux-1.14.0-amd64
