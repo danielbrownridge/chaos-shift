@@ -4,7 +4,8 @@ Demonstrate Chaos Engineering with OpenShift
 # Overview
 This script configures an OpenShift cluster for the purposes of demonstrating OpenShift techniques.
 
-Currently this works by fullying automating a local install of OpenShift using [CodeReady Containers][crc]
+Currently this works by fullying automating a local install of OpenShift using [CodeReady Containers][crc].
+The script also installs [virt-manager] to assist with managing the virtual machine that OpenShift runs in.
 
 ## todo
 
@@ -28,12 +29,36 @@ For an easy way to install and configure Ansible and Python 3 on Ubuntu see [vir
 Install using `make`...
 
     make
+
+This will start the Ansible playbook which will install necessary packages, download CRC and configure a cluster.
+
+# Quickstart
+
+You can manage the cluster using ..
+
+    crc console
     
+And use the default credentials:
+
+username|password
+--------|--------
+kubeadmin|DhjTx-8gIJC-2h2tK-eksGY
+
+You can stop the cluster using ...
+
+    crc stop
+    
+You can manage the virtual machine using:
+
+    virt-manager &
+
+For more detailed instructions see the [CRC Getting Started Guide][crc-docs].
+
 # Tests
 
 Run tests using `make`...
 
-    make test
+    make testDocumentation
 
 This project uses [shUnit2][shunit2]
 
@@ -45,6 +70,7 @@ This project uses [shUnit2][shunit2]
 [aws]: https://aws.amazon.com/
 [azure]: https://azure.microsoft.com/
 [crc]: https://github.com/code-ready/crc
+[crc-docs]: https://code-ready.github.io/crc/
 [gke]: https://cloud.google.com/kubernetes-engine
 [make]: https://www.gnu.org/software/make/
 [python]: https://www.python.org/
