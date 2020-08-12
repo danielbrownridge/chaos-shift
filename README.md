@@ -5,7 +5,7 @@ Demonstrate Chaos Engineering with OpenShift
 This script configures an OpenShift cluster for the purposes of demonstrating OpenShift techniques.
 
 Currently this works by fullying automating a local install of OpenShift using [CodeReady Containers][crc].
-The script also installs [virt-manager] to assist with managing the virtual machine that OpenShift runs in.
+The script also installs [Virtual Machine Manager][virt-manager] to assist with managing the virtual machine that OpenShift runs in.
 
 ## todo
 
@@ -77,4 +77,4 @@ This project uses [shUnit2][shunit2]
 [ubuntu]: https://ubuntu.com/
 [shunit2]: https://github.com/kward/shunit2
 [virtinit]: https://github.com/danielbrownridge/virtinit
-[virt-manage]: https://virt-manager.org/
+[virt-manager]: https://virt-manager.org/
