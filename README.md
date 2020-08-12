@@ -6,13 +6,16 @@ This script configures an OpenShift cluster for the purposes of demonstrating Op
 
 Currently this works by fullying automating a local install of OpenShift using [CodeReady Containers][crc]
 
+## todo
+
+ * Run some Experiments
 
 # Requirements
  * [Ubuntu][ubuntu] (18.04 LTS)
  * [Ansible][ansible] (2.9+)
  * [Python][python] (3.6+)
- * Make (4.0+)
-https://ubuntu.com/
+ * [Make][make] (4.0+)
+
 ---
 **Note**
 
@@ -25,6 +28,14 @@ For an easy way to install and configure Ansible and Python 3 on Ubuntu see [vir
 Install using `make`...
 
     make
+    
+# Tests
+
+Run tests using `make`...
+
+    make test
+
+This project uses [shUnit2][shunit2]
 
 ## Ideas for future work
 * Support platforms other than Ubuntu
@@ -35,6 +46,8 @@ Install using `make`...
 [azure]: https://azure.microsoft.com/
 [crc]: https://github.com/code-ready/crc
 [gke]: https://cloud.google.com/kubernetes-engine
+[make]: https://www.gnu.org/software/make/
 [python]: https://www.python.org/
 [ubuntu]: https://ubuntu.com/
+[shunit2]: https://github.com/kward/shunit2
 [virtinit]: https://github.com/danielbrownridge/virtinit
