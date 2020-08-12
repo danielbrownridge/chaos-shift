@@ -77,3 +77,4 @@ This project uses [shUnit2][shunit2]
 [ubuntu]: https://ubuntu.com/
 [shunit2]: https://github.com/kward/shunit2
 [virtinit]: https://github.com/danielbrownridge/virtinit
+[virt-manage]: https://virt-manager.org/
