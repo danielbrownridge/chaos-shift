@@ -2,10 +2,14 @@
 # file: tests.sh
 
 testFoundCRC() {
-    cmd="crc"
+    while read -r cmd desc; do
     output=$(command -V "$cmd")
     rtrn=$?
-    assertTrue "${output}" ${rtrn}
+    assertTrue "$desc: $output" $rtrn
+    done <<EOF
+crc CodeReady Containers
+oc OpenShift CLI
+EOF
 }
 
 testInstalledPkg() {
