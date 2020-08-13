@@ -49,6 +49,16 @@
 
     - name: Start OpenShift cluster
       command: crc start --pull-secret-file pull-secret.json
+    
+    - name: Get 'oc' binary path.
+      command: crc oc-env
+      register: oc_env
+      tags: issue-3
+
+    - name: Add 'oc' binary path to .bashrc
+      blockinfile:
+        path: ~/.bashrc
+        block: "{{ oc_env.stdout }}"
 
     vars:
        crc_archive: crc-linux-amd64.tar.xz
