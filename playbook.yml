@@ -52,7 +52,12 @@
 
     - name: Start OpenShift cluster
       command: crc start --pull-secret-file pull-secret.json
-    
+      
+    - name: Get kubeadmin password
+      shell: crc console --credentials | grep kubeadmin | sed 's/.* -p \(.*\) .*/\1/'
+      register: kubeadmin_password
+      tags: x
+
     - name: Get 'oc' binary path.
       command: crc oc-env
       register: oc_env
@@ -61,6 +66,26 @@
       blockinfile:
         path: ~/.bashrc
         block: "{{ oc_env.stdout }}"
+
+    - name: Login as kubeadmin
+      shell: oc login -u kubeadmin -p {{ kubeadmin_password.stdout }}
+      tags: x
+
+# What are you trying to do?
+# Get a k8s command to work.
+    - name: Get kubeadmin session token
+      shell: oc whoami -t
+      register: oc_token
+      tags: x
+
+    - debug:
+        msg: "{{ oc_token.stdout }}"
+      tags: x
+
+    - name: Get info from Kubernetes
+      k8s_info:
+        kind: clusterversion
+      tags: x
 
     vars:
        crc_archive: crc-linux-amd64.tar.xz
