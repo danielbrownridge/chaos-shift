@@ -47,6 +47,9 @@
     - name: CodeReady Containers setup
       command: crc setup
 
+    - name: Assign 12GiB of memory to CodeReady containers virtual machine
+      command: crc config set memory 12288
+
     - name: Start OpenShift cluster
       command: crc start --pull-secret-file pull-secret.json
     
