@@ -1,3 +1,4 @@
+*.swo
 *.swp
 *.tar.xz
 pull-secret

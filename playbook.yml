@@ -25,6 +25,14 @@
         - qemu-kvm
       become: true
 
+    - name: Install Python package dependences for Kubernetes
+      pip:
+        name:
+        - openshift
+        - pyyaml
+        - jmespath
+      become: true
+
     # 2.3. Installing CodeReady Containers
     # https://code-ready.github.io/crc/#installing-codeready-containers_gsg
     - name: Download CodeReady Containers archive
@@ -51,12 +59,11 @@
       command: crc config set memory 12288
 
     - name: Start OpenShift cluster
-      command: crc start --pull-secret-file pull-secret.json
+      command: crc start --pull-secret-file pull-secret
       
     - name: Get kubeadmin password
       shell: crc console --credentials | grep kubeadmin | sed 's/.* -p \(.*\) .*/\1/'
       register: kubeadmin_password
-      tags: x
 
     - name: Get 'oc' binary path.
       command: crc oc-env
@@ -69,23 +76,28 @@
 
     - name: Login as kubeadmin
       shell: oc login -u kubeadmin -p {{ kubeadmin_password.stdout }}
-      tags: x
 
-# What are you trying to do?
-# Get a k8s command to work.
     - name: Get kubeadmin session token
       shell: oc whoami -t
       register: oc_token
-      tags: x
-
-    - debug:
-        msg: "{{ oc_token.stdout }}"
-      tags: x
 
     - name: Get info from Kubernetes
       k8s_info:
-        kind: clusterversion
-      tags: x
+        kind: ClusterVersion
+        name: version
+      register: k8s_output
+
+    - name: Patch ClusterVersion to enable cluster-monitoring
+      k8s:
+        kind: ClusterVersion
+        name: version
+        definition:
+          spec:  "{{ k8s_output | json_query(query) }}"
+      vars:
+        query: |
+          resources[].{
+            overrides: spec.overrides[?name!=`cluster-monitoring-operator`]
+          } | [0]
 
     vars:
        crc_archive: crc-linux-amd64.tar.xz
