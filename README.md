@@ -26,6 +26,9 @@ For an easy way to install and configure Ansible and Python 3 on Ubuntu see [vir
 
 # Installation
 
+Replace the contents of `pull-secret` with the one from your RedHat account.
+https://cloud.redhat.com/openshift/install/crc/installer-provisioned
+
 Install using `make`...
 
     make
