@@ -11,6 +11,7 @@
       loop:
         - opt
         - bin
+
   - name: CodeReady Containers
     block:
 
@@ -98,7 +99,26 @@
           resources[].{
             overrides: spec.overrides[?name!=`cluster-monitoring-operator`]
           } | [0]
-
     vars:
        crc_archive: crc-linux-amd64.tar.xz
        crc_dir: crc-linux-1.14.0-amd64
+
+  - name: Configure odo
+    block:
+    - name: Download odo
+      get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/odo/latest/{{ odo_bin }}
+        dest: ~/opt/{{ odo_bin }}
+        mode: u+x
+      tags: x
+    - name: 
+      file:
+        src: ~/opt/{{ odo_bin }}
+        dest: ~/bin/odo
+        state: link
+      tags: x
+    vars:
+       odo_bin: odo-linux-amd64
+
+  - name: Configure sample application
+    block:
