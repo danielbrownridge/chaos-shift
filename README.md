@@ -68,6 +68,8 @@ This project uses [shUnit2][shunit2]
 ## Ideas for future work
 * Support platforms other than Ubuntu
 * Integrate with cloud hosting providers [AWS][aws], [GKE][gke], [Azue][azure]
+* Auto install Spinnaker
+* Install Chaos Monkey
 
 [ansible]: https://www.ansible.com/
 [aws]: https://aws.amazon.com/
