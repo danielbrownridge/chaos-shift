@@ -70,6 +70,7 @@ This project uses [shUnit2][shunit2]
 * Integrate with cloud hosting providers [AWS][aws], [GKE][gke], [Azue][azure]
 * Auto install Spinnaker
 * Install Chaos Monkey
+* Compare tools https://blog.container-solutions.com/comparing-chaos-engineering-tools
 
 [ansible]: https://www.ansible.com/
 [aws]: https://aws.amazon.com/
